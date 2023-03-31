@@ -1,1 +1,3 @@
 *.class
+compiled/
+sources.txt
