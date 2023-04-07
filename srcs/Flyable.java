@@ -1,8 +1,14 @@
+// UML:
+// interface Flyable <<Interface>>
+// {
+//		#WeatherTower weatherTower
+//		+abstract void updateConditions()
+//		+registerTower(WeatherTower* p_tower)
+// }
+
 package srcs;
 
 public interface Flyable {
-	protected WeatherTower weatherTower = new WeatherTower();
-
-	abstract void updateConditions();
-    void registerTower(WeatherTower weatherTower);
+    public void updateConditions();
+    public void registerTower(WeatherTower p_tower);
 }

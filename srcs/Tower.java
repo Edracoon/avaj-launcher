@@ -1,13 +1,17 @@
+// UML:
 // class Tower
 // {
-// - List<Flyable*> observers
-// +void register(Flyable* p_flyable)
-// +void unregister(Flyable* p_flyable)
-// #void conditionChanged()
+//		- List<Flyable*> observers
+//		+void register(Flyable* p_flyable)
+//		+void unregister(Flyable* p_flyable)
+//		#void conditionChanged()
 // }
+package srcs;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tower {
-	private List<Flyable> observers = new ArrayList<Flyable>();
+	static private List<Flyable> observers = new ArrayList<Flyable>();
 
 	public void register(Flyable flyable) {
 		observers.add(flyable);

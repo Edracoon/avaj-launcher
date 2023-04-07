@@ -24,6 +24,12 @@ public class Data {
 					simulations = Integer.parseInt(line, 10);
 				else {
 					String[]    split = line.split(" ");
+					if (split.length != 5)
+						throw new IOException("Invalid number of arguments: " + split.length);
+					if (!split[0].equals("Helicopter")
+						&& !split[0].equals("JetPlane")
+						&& !split[0].equals("Baloon"))
+						throw new IOException("Invalid aircraft type: " + split[0]);
 					// Coordinates  coordinates = new Coordinates(Integer.parseInt(split[0], 10), Integer.parseInt(split[1], 10), Integer.parseInt(split[2], 10));
 					// System.out.println("Coordinates: " + line);
 				}
