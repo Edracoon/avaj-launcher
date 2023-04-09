@@ -16,6 +16,6 @@ class WeatherTower extends Tower
 
 	public void changeWeather()
 	{
-		// TODO
+		
 	}
 }

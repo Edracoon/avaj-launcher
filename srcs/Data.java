@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class Data {
 
-	public int simulations;
+	public int				simulations;
+	protected WeatherTower	weatherTower;
 
 	public void parseFile(String filename) {
 
@@ -19,7 +20,6 @@ public class Data {
 			System.out.println("Reading file: " + filename);
 			while ((line = reader.readLine()) != null) {
 				i++;
-				System.out.println("L" + (i + 1) + ": " + line);
 				if (i == 0) {
 					try { simulations = Integer.parseInt(line, 10); }
 					catch (NumberFormatException e) {
@@ -34,6 +34,15 @@ public class Data {
 						&& !split[0].equals("JetPlane")
 						&& !split[0].equals("Baloon"))
 						throw new CustomException("Error\nInvalid aircraft type: \'" + split[0] + "\' at line " + (i + 1));
+					// Create coordinates and aircraft
+					try {
+						// Coordinates coordinates = new Coordinates();
+						Flyable aircraft = AircraftFactory.getInstance().newAircraft(split[0], split[1], Integer.parseInt(split[2], 10), Integer.parseInt(split[3], 10), Integer.parseInt(split[4], 10));
+						weatherTower.register(aircraft);
+					}
+					catch (NumberFormatException e) {
+						throw new CustomException("Error at line " + (i + 1) + ": Invalid number format");
+					}
 					// Coordinates  coordinates = new Coordinates(Integer.parseInt(split[0], 10), Integer.parseInt(split[1], 10), Integer.parseInt(split[2], 10));
 					// System.out.println("Coordinates: " + line);
 				}
@@ -46,6 +55,5 @@ public class Data {
 		catch (CustomException e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
 }
