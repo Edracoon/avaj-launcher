@@ -19,26 +19,32 @@ public class Data {
 			System.out.println("Reading file: " + filename);
 			while ((line = reader.readLine()) != null) {
 				i++;
-				System.out.println("L" + i + ": " + line);
-				if (i == 0)
-					simulations = Integer.parseInt(line, 10);
+				System.out.println("L" + (i + 1) + ": " + line);
+				if (i == 0) {
+					try { simulations = Integer.parseInt(line, 10); }
+					catch (NumberFormatException e) {
+						throw new CustomException("Error\nInvalid number format at line " + (i + 1) + " (Expected a number of simulations)");
+					}
+				}
 				else {
 					String[]    split = line.split(" ");
 					if (split.length != 5)
-						throw new IOException("Invalid number of arguments: " + split.length);
+						throw new CustomException("Error\nInvalid number of arguments at line " + (i + 1));
 					if (!split[0].equals("Helicopter")
 						&& !split[0].equals("JetPlane")
 						&& !split[0].equals("Baloon"))
-						throw new IOException("Invalid aircraft type: " + split[0]);
+						throw new CustomException("Error\nInvalid aircraft type: \'" + split[0] + "\' at line " + (i + 1));
 					// Coordinates  coordinates = new Coordinates(Integer.parseInt(split[0], 10), Integer.parseInt(split[1], 10), Integer.parseInt(split[2], 10));
 					// System.out.println("Coordinates: " + line);
 				}
-
 			}
 			System.out.println("Simulations: " + simulations);
-
-		} catch (IOException e) {
-			System.err.println("Error reading file: " + e.getMessage());
+		}
+		catch (IOException e) {
+			System.out.println("Error reading file: " + filename + " " + e.getMessage());
+		}
+		catch (CustomException e) {
+			System.out.println(e.getMessage());
 		}
 
 	}
