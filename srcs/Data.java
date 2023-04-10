@@ -8,9 +8,8 @@ import java.io.IOException;
 public class Data {
 
 	public int				simulations;
-	protected WeatherTower	weatherTower;
 
-	public void parseFile(String filename) {
+	public void parseFile(String filename, WeatherTower weatherTower) {
 
 		File    file = new File(filename);
 
@@ -25,9 +24,11 @@ public class Data {
 					catch (NumberFormatException e) {
 						throw new CustomException("Error\nInvalid number format at line " + (i + 1) + " (Expected a number of simulations)");
 					}
+					if (simulations < 0)
+						throw new CustomException("Error\nInvalid number of simulations at line " + (i + 1) + " (Expected a positive number)");
 				}
 				else {
-					String[]    split = line.split(" ");
+					String[]	split = line.split(" ");
 					if (split.length != 5)
 						throw new CustomException("Error\nInvalid number of arguments at line " + (i + 1));
 					if (!split[0].equals("Helicopter")
@@ -36,15 +37,19 @@ public class Data {
 						throw new CustomException("Error\nInvalid aircraft type: \'" + split[0] + "\' at line " + (i + 1));
 					// Create coordinates and aircraft
 					try {
-						// Coordinates coordinates = new Coordinates();
-						Flyable aircraft = AircraftFactory.getInstance().newAircraft(split[0], split[1], Integer.parseInt(split[2], 10), Integer.parseInt(split[3], 10), Integer.parseInt(split[4], 10));
+						int longi = Integer.parseInt(split[2], 10);
+						int lati = Integer.parseInt(split[3], 10);
+						int height = Integer.parseInt(split[4], 10);
+						if (longi < 0 || lati < 0 || height < 0)
+							throw new CustomException("Error\nInvalid coordinates at line " + (i + 1) + " (Expected positive numbers)");
+						if (height > 100) height = 100;
+						Flyable aircraft = AircraftFactory.getInstance().newAircraft(split[0], split[1], longi, lati, height);
 						weatherTower.register(aircraft);
+						aircraft.registerTower(weatherTower);
 					}
 					catch (NumberFormatException e) {
 						throw new CustomException("Error at line " + (i + 1) + ": Invalid number format");
 					}
-					// Coordinates  coordinates = new Coordinates(Integer.parseInt(split[0], 10), Integer.parseInt(split[1], 10), Integer.parseInt(split[2], 10));
-					// System.out.println("Coordinates: " + line);
 				}
 			}
 			System.out.println("Simulations: " + simulations);

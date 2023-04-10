@@ -1,7 +1,9 @@
 import srcs.Data;
-import srcs.Coordinates;
+import srcs.WeatherTower;
 
 public class Main {
+
+    public static WeatherTower weatherTower = new WeatherTower();
 
     public static void main(String[] args) {
         Data    data = new Data();
@@ -13,6 +15,13 @@ public class Main {
 
         String filename = args[0];
 
-        data.parseFile(filename);
+        data.parseFile(filename, weatherTower);
+
+        for (int i = 0; i < data.simulations; i++) {
+            System.out.println("--- Simulation " + (i + 1) + " started ---");
+            weatherTower.changeWeather();
+        }
+
+        System.out.println("Simulation finished");
     }
 }

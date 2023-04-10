@@ -1,11 +1,3 @@
-// UML:
-// interface Flyable <<Interface>>
-// {
-//		#WeatherTower weatherTower
-//		+abstract void updateConditions()
-//		+registerTower(WeatherTower* p_tower)
-// }
-
 package srcs;
 
 public interface Flyable {

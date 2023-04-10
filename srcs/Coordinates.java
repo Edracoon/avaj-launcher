@@ -6,8 +6,6 @@ public class Coordinates {
 	private int height;
 	
 	public Coordinates(int p_longitude, int p_latitude, int p_height) {
-		// • Coordinates are positive numbers.
-		// • The height is in the 0-100 range.
 		longitude = p_longitude;
 		latitude = p_latitude;
 		height = p_height;
