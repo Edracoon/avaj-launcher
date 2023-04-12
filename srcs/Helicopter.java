@@ -16,39 +16,18 @@ public class Helicopter extends Aircraft implements Flyable {
 	public void updateConditions() {
 		String currWeather = this.weatherTower.getWeather(coordinates);
 		System.out.println("-> Helicopter " + this.name + " - " + currWeather);
-		if (currWeather.equals("SUN")) {
-			this.coordinates = new Coordinates(
-				this.coordinates.getLongitude() + 10,
-				this.coordinates.getLatitude(),
-				this.coordinates.getHeight() + 2
-			);
-		}
-		else if (currWeather.equals("RAIN")) {
-			this.coordinates = new Coordinates(
-				this.coordinates.getLongitude() + 5,
-				this.coordinates.getLatitude(),
-				this.coordinates.getHeight()
-			);
-		}
-		else if (currWeather.equals("FOG")) {
-			this.coordinates = new Coordinates(
-				this.coordinates.getLongitude() + 1,
-				this.coordinates.getLatitude(),
-				this.coordinates.getHeight()
-			);
-		}
-		else if (currWeather.equals("SNOW")) {
-			this.coordinates = new Coordinates(
-				this.coordinates.getLongitude(),
-				this.coordinates.getLatitude(),
-				this.coordinates.getHeight() - 12
-			);
-		}
+		if (currWeather.equals("SUN"))
+			this.coordinates.updateCoordinates(10, 0, 2);
+		else if (currWeather.equals("RAIN"))
+			this.coordinates.updateCoordinates(5, 0, 0);
+		else if (currWeather.equals("FOG"))
+			this.coordinates.updateCoordinates(1, 0, 0);
+		else if (currWeather.equals("SNOW"))
+			this.coordinates.updateCoordinates(0, 0, -12);
 		// Unregister if height is 0
 		if (this.coordinates.getHeight() <= 0) {
 			this.weatherTower.unregister(this);
-			System.out.println("Helicopter #" + this.name + "(" + this.id + "): landing.");
-			System.out.println("Tower says: Helicopter #" + this.name + "(" + this.id + ")" + " unregistered from weather tower.");
+			System.out.println("\u001B[1m" + "Tower says: \"Helicopter #" + this.name + " (" + this.id + ") : landing and unregistered from weather tower.\"" + "\u001B[0m");
 		}
 		// Restrict height to 100
 		if (this.coordinates.getHeight() > 100) {

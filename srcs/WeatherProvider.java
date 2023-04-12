@@ -1,4 +1,5 @@
 package srcs;
+import java.util.Random;
 
 public class WeatherProvider {
 	// Intance of WeatherProvider for singleton
@@ -17,7 +18,9 @@ public class WeatherProvider {
 	}
 
 	public String getCurrentWeather(Coordinates coordinates) {
-		int xyz = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+		// Add some randomness to the weather (Weather is not always an exact science ;D)
+		// int random = new Random().nextInt(4);
+		int xyz = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight(); // + random;
 		return weather[xyz % 4];
 	}
 }
