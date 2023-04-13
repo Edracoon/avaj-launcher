@@ -56,9 +56,11 @@ public class Data {
 		}
 		catch (IOException e) {
 			System.out.println("Error reading file: " + filename + " " + e.getMessage());
+			System.exit(1);
 		}
 		catch (CustomException e) {
 			System.out.println(e.getMessage());
+			System.exit(1);
 		}
 	}
 }
