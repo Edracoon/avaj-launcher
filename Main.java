@@ -18,7 +18,7 @@ public class Main {
         data.parseFile(filename, weatherTower);
 
         for (int i = 0; i < data.simulations; i++) {
-            System.out.println("--- Simulation " + (i + 1) + " started ---");
+            System.out.println("\u001B[32m--- Simulation " + (i + 1) + " started ---\u001B[0m");
             weatherTower.changeWeather();
         }
 

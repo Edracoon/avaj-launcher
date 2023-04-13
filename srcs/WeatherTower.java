@@ -1,8 +1,3 @@
-// class WeatherTower
-// {
-// +string getWeather(Coordinates p_coordinates)
-// +void changeWeather()
-// }
 package srcs;
 
 public class WeatherTower extends Tower

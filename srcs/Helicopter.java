@@ -15,7 +15,7 @@ public class Helicopter extends Aircraft implements Flyable {
 	@Override
 	public void updateConditions() {
 		String currWeather = this.weatherTower.getWeather(coordinates);
-		System.out.println("-> Helicopter " + this.name + " - " + currWeather);
+		System.out.println("Helicopter #" + this.name + " (" + this.id + ") has " + currWeather);
 		if (currWeather.equals("SUN"))
 			this.coordinates.updateCoordinates(10, 0, 2);
 		else if (currWeather.equals("RAIN"))
@@ -28,14 +28,6 @@ public class Helicopter extends Aircraft implements Flyable {
 		if (this.coordinates.getHeight() <= 0) {
 			this.weatherTower.unregister(this);
 			System.out.println("\u001B[1m" + "Tower says: \"Helicopter #" + this.name + " (" + this.id + ") : landing and unregistered from weather tower.\"" + "\u001B[0m");
-		}
-		// Restrict height to 100
-		if (this.coordinates.getHeight() > 100) {
-			this.coordinates = new Coordinates(
-				this.coordinates.getLongitude(),
-				this.coordinates.getLatitude(),
-				100
-			);
 		}
 	}
 

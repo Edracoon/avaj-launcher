@@ -15,7 +15,7 @@ public class JetPlane extends Aircraft implements Flyable {
 	@Override
 	public void updateConditions() {
 		String currWeather = this.weatherTower.getWeather(coordinates);
-		System.out.println("-> JetPlane " + this.name + " - " + currWeather);
+		System.out.println("JetPlane #" + this.name + " (" + this.id + ") has " + currWeather);
 		if (currWeather.equals("SUN"))
 			this.coordinates.updateCoordinates(0, 10, 2);
 		else if (currWeather.equals("RAIN"))
